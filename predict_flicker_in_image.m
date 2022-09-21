@@ -50,7 +50,7 @@ function P = predict_flicker_in_image( frame_a, frame_b, ppd, fps, tfilter, opti
         psyalpha = -0.1008;
         psybeta = 0.9061;
     else
-        psyalpha = options.psyoffset;
+        psyalpha = options.psyalpha;
         psybeta = options.psybeta;
     end
     
