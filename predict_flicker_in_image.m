@@ -17,7 +17,7 @@ function P = predict_flicker_in_image( frame_a, frame_b, ppd, fps, tfilter, opti
 % under review.
 %
 % Copyright (c) 2022 Gyorgy Denes (gdenes355@gmail.com), Pontus Andersson, 
-% Tomas Akenine-Möller, Kalle Åström, William H. McIlhagga
+% Tomas Akenine-MÃ¶ller, Kalle Ã…strÃ¶m, Magnus Oskarsson, William H. McIlhagga
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal

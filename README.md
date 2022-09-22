@@ -4,8 +4,8 @@
 
 Flicker predictor reference implementation accompanying the under-review paper _"Estimates of Temporal Edge Detection Filters in Human Vision"_. This is a simplified version of the multi-scale [flicker model by Denes and Mantiuk 2020](https://github.com/gdenes355/flicker_metric_hvei).
 
-The video cube is sampled at double the display refresh rat, and is convolved with a sampled temporal edge detection filter alongside the time axis. Values in the output that would require values from outside the time domain range are omitted.
-To avoid scaling issues introduced by the changing refresh rates and the discrete convolution, we first normalize the edge detection filter such that all positive samples sum to $1$, and all negative samples sum to $-1$. The filter response varies along the time dimension, and we take the maximum value for each frame along the time axis to get the largest response perceived during the second. These values are blurred as per Denes and Mantiuk 2020 before feeding them through a psychometric function to yield a probability of detection map.
+The video cube is sampled at double the display refresh rate, and is convolved with a sampled temporal edge detection filter alongside the time axis. Values in the output that would require values from outside the time domain range are omitted.
+To avoid scaling issues introduced by the changing refresh rates and the discrete convolution, we first normalize the edge detection filter such that all positive samples sum to $1$, and all negative samples sum to $-1$. The filter response varies along the time dimension, and we take the maximum value for each pixel along the time axis to get the largest response perceived during the second. These values are blurred as per Denes and Mantiuk 2020 before feeding them through a psychometric function to yield a probability of detection map.
 
 ## Usage
 The model is self-contained in this repository. The single entry point is `predict_flicker_in_image.m` which takes two consecutive frames, a display resolution (ppd) and a refresh rate. Frames should be in CIE XYZ. The model could be trivially extended to cope with an arbitrary video cube.
@@ -44,7 +44,7 @@ GroundTruth = squeeze(stimuli.P(iS,:,:));
 
 ## References
 _Under review_
-[1] Pontus Andersson, Tomas Akenine-Möller, Kalle Åström, William H. McIlhagga "Estimates of Temporal Edge Detection Filters in Human Vision" 
+[1] Pontus Andersson, Tomas Akenine-Möller, Gyorgy Denes, Kalle Åström, Magnus Oskarsson, William H. McIlhagga "Estimates of Temporal Edge Detection Filters in Human Vision" 
 
 If you found  the stimuli dataset useful, please also cite our previous work:
 
@@ -53,7 +53,7 @@ If you found  the stimuli dataset useful, please also cite our previous work:
 ## License
 MIT License
 
-Copyright (c) 2022 Gyorgy Denes, Pontus Andersson, Tomas Akenine-Möller, Kalle Åström, William H. McIlhagga
+Copyright (c) 2022 Gyorgy Denes, Pontus Andersson, Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
