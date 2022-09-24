@@ -11,9 +11,13 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
 %  - d_all: analytical disef function fitted to t_all, sampled
 %  - d_low: analytical disef function fitted to t_low, sampled
 %
+% References
+% under review.
+%
 % MIT License
 % Copyright (c) 2022 Gyorgy Denes (gdenes355@gmail.com), Pontus Andersson, 
-% Tomas Akenine-Möller, Kalle Åström, William H. McIlhagga
+% Tomas Akenine-MÃ¶ller, Kalle Ã…strÃ¶m, Magnus Oskarsson, William H. McIlhagga
+%
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
 % in the Software without restriction, including without limitation the rights
