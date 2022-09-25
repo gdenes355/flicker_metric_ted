@@ -60,7 +60,7 @@ function P = predict_flicker_in_image( frame_a, frame_b, ppd, fps, tfilter, opti
     % time samples
     t = (0:(1/(SAMPLES_PER_FRAME*fps)):1.0)';
     
-    % video frames (luiminance only)
+    % video frames (luminance only)
     vid = zeros(size(t,1), size(frame_a, 1), size(frame_a, 2));
     allmask = 1:size(t,1);
     amask = mod(floor(allmask/SAMPLES_PER_FRAME),2)==0;

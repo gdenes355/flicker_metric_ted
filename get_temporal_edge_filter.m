@@ -1,7 +1,7 @@
 function [filt, t] = get_temporal_edge_filter(t, tfilter)
 % sample the given temporal edge detection filter at time values t.
 % t: the time values at which we sample the filter
-% afilter: type of filter to use. Defaults to d_all
+% tfilter: type of filter to use. Defaults to d_all
 %
 % filter types: 
 %  - t_all: final filter from the paper
@@ -67,8 +67,8 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
     end
 
     % remove nan values
-    filt = filt(~isnan(filt));
     t = t(~isnan(filt));
+    filt = filt(~isnan(filt));
     
     % normalise so +ves sum to 1, -ves sum to -1
     filt(filt>0) = filt(filt>0) / sum(filt(filt>0));
