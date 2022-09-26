@@ -13,6 +13,9 @@ The model is self-contained in this repository. The single entry point is `predi
 ## Examples
 For example usage, please see the `demo` folder.
 
+## Python implementation
+There is a Python reference implementation available in [reference_impl_py.ipynb](reference_impl_py.ipynb). This is a translation of the original Matlab code, and is expected to yield similar answers to the original Matlab implementation. Results in the paper are based on Matlab.
+
 
 ## Dataset
 This flicker stimuli dataset is reproduced from https://github.com/gdenes355/flicker_metric_hvei. Details on its collection can be found in the original paper (pre-print: https://www.cl.cam.ac.uk/~gd355/publications/hvei20_paper_comp.pdf). For completeness, we reproduce the dataset desciption here as well.
