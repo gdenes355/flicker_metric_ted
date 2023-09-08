@@ -4,12 +4,9 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
 % tfilter: type of filter to use. Defaults to d_all
 %
 % filter types: 
-%  - t_all: final filter from the paper
-%  - t_low: filter from low-contrast cases only
-%  - d_all_interp: disef function fitted to all 60Hz data (t_all), interpolated
-%  - d_low_interp: disef function fitted to t_low, interpolated
-%  - d_all: analytical disef function fitted to t_all, sampled
-%  - d_low: analytical disef function fitted to t_low, sampled
+%  - t_all: final filter from the paper, interpolated
+%  - d_all: analytical disef function fitted to t_all, sampled in time
+%  - tcsf_all: filter based on temporal CSF (stelaCSF), sampled in time
 %
 % References
 % under review.
@@ -40,32 +37,52 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
     
     % switch (tfilter)
     if strcmpi(tfilter, 'd_all')
-        s_in_sec = 1.74443648427644 / 60;   % s value from paper
+		% DISEF
+        s_in_sec = 0.016;   % s value from paper
+		amp = 148;          % amplitude from paper
         t0 = mean(t);  % shift the fitler to be in the middle of t
         t = t - t0;
-        filt = -sign(t).*exp(-abs(t)/(s_in_sec));  % DISEF
-    elseif strcmpi(tfilter, 'd_low')
-        s_in_sec = 1.2386001106974815 / 60;  % s value from paper
-        t0 = mean(t);  % shift the fitler to be in the middle of t
-        t = t - t0;
-        filt = -sign(t).*exp(-abs(t)/(s_in_sec));  % DISEF
-    else
-        % this might be an interpolated filter.
-        if strcmpi(tfilter, 't_all')
-            samples = [3.955975174903869629e-01, -1.020166635513305664e+00, -3.440489530563354492e+00, -5.091692924499511719e+00, -5.026970863342285156e+00, -2.602464199066162109e+00, 3.469745635986328125e+00, 1.378295803070068359e+01, 2.633740043640136719e+01, 3.921465301513671875e+01, 1.188159108161926270e+00, -2.439352607727050781e+01, -1.657835006713867188e+01, -9.859210014343261719e+00, -6.638015270233154297e+00, -6.391635417938232422e+00, -5.401230812072753906e+00, -3.818691492080688477e+00, -1.050134897232055664e+00, 2.127528429031372070e+00, 2.900552988052368164e+00]';
-        elseif strcmpi(tfilter, 'd_all_interp')
-            samples = [1.909064141608989573e-01, 3.386727748829402862e-01, 6.008140111533419869e-01, 1.065859150098313224e+00, 1.890860909963615333e+00, 3.354434758568847652e+00, 5.950851535511070267e+00, 1.055696012785268678e+01, 1.872831249040729062e+01, 3.322449687130618656e+01, -0.000000000000000000e+00, -3.322449687130618656e+01, -1.872831249040729062e+01, -1.055696012785268678e+01, -5.950851535511070267e+00, -3.354434758568847652e+00, -1.890860909963615333e+00, -1.065859150098313224e+00, -6.008140111533419869e-01, -3.386727748829402862e-01, -1.909064141608989573e-01]';
-        elseif strcmpi(tfilter, 't_low')
-            samples = [2.467014074325561523e+00, 1.195966601371765137e+00, -1.652753710746765137e+00, -5.535111904144287109e+00, -8.609863281250000000e+00, -8.827475547790527344e+00, -4.716462135314941406e+00, 1.016245746612548828e+01, 3.350759124755859375e+01, 5.394515991210937500e+01, 6.111305236816406250e+00, -3.482356262207031250e+01, -1.925815010070800781e+01, -5.424099922180175781e+00, -1.625993967056274414e+00, -7.347380161285400391e+00, -7.372952938079833984e+00, -4.587455749511718750e+00, -2.869678020477294922e+00, 2.272292226552963257e-02, 2.123717546463012695e+00]';
-        elseif strcmpi(tfilter, 'd_low_interp')
-            samples = [3.219703752655577594e-02, 7.218537057656362887e-02, 1.618387319323421891e-01, 3.628404889282670909e-01, 8.134840086410377591e-01, 1.823821355409757761e+00, 4.088985525364493334e+00, 9.167456328464750115e+00, 2.055332673911014041e+01, 4.608031114726507838e+01, -0.000000000000000000e+00, -4.608031114726507838e+01, -2.055332673911014041e+01, -9.167456328464750115e+00, -4.088985525364493334e+00, -1.823821355409757761e+00, -8.134840086410377591e-01, -3.628404889282670909e-01, -1.618387319323421891e-01, -7.218537057656362887e-02, -3.219703752655577594e-02]';       
-        else
-            error('unknown filter');
-        end
+        filt = -amp * sign(t).*exp(-abs(t)/(s_in_sec));  % DISEF function
+		
+    elseif strcmpi(tfilter, 't_all')
+		% "free" filter
+		samples = [2.380681037902832031e-01, -3.177686214447021484e+00, -1.703772783279418945e+00, -8.107570409774780273e-01, 3.285695016384124756e-01, -7.167906761169433594e-01, 2.733870744705200195e+00, 1.208868598937988281e+01, 2.555757522583007812e+01, 4.278320312500000000e+01, 5.342393517494201660e-01, -4.472121047973632812e+01, -2.688981056213378906e+01, -1.345495414733886719e+01, -5.092443943023681641e+00, -1.369577884674072266e+00, -4.700142741203308105e-01, 1.906259655952453613e+00, 4.587969779968261719e+00, 5.420155048370361328e+00, 2.884223461151123047e+00]';    
+        
         samplets = (0:(size(samples, 1)-1)) / 60;  % filters were measured for 60Hz
         filt = interp1(samplets, samples, t);
-    end
+		
+    elseif strcmpi(tfilter, 'tcsf_all')
+		% temporal csf from stelaCSF
+		t0 = mean(t);
+		t_interp = t - t0;
+		
+		F_s = 960;
+		N_s = 2 * F_s + 1;
+		
+		% Generate tCSF
+        try
+            csf = CSF_stelaCSF();
+        catch e
+            % try adding dependency folder
+            folder = fileparts(mfilename('fullpath'));
+            addpath(sprintf("%s/%s", folder, 'deps'));
+            csf = CSF_stelaCSF();
+        end
+		omega = linspace(0, F_s/2, floor(N_s / 2));
+		[~, R_trans] = csf.get_sust_trans_resp(omega);
+		filt_fft = 1j * [0, R_trans, -flip(R_trans)];
+		filt = ifft(filt_fft);
+		filt = fftshift(real(filt));
+		
+		% Generate time samples
+		delta = 1 / F_s;
+		t = linspace(-F_s, F_s, N_s)' * delta;
 
+		% interp
+		filt = interp1(t, filt, t_interp);
+	else
+		error('unknown filter');
+	end
     % remove nan values
     t = t(~isnan(filt));
     filt = filt(~isnan(filt));
