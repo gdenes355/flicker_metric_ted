@@ -12,8 +12,8 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
 % under review.
 %
 % MIT License
-% Copyright (c) 2022 Gyorgy Denes (gdenes355@gmail.com), Pontus Andersson, 
-% Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga
+% Copyright (c) 2022 Pontus Ebelin, Gyorgy Denes, Tomas Akenine-Möller, Kalle Åström, 
+% Magnus Oskarsson, William H. McIlhagga
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal

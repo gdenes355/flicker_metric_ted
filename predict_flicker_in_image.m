@@ -14,10 +14,11 @@ function P = predict_flicker_in_image( frame_a, frame_b, ppd, fps, tfilter, opti
 % for example use, see demo folder
 %
 % References
-% under review.
+% Accepted to ACM Transations on Applied Perception (TAP) 2024
 %
-% Copyright (c) 2022 Gyorgy Denes (gdenes355@gmail.com), Pontus Andersson, 
-% Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga
+% MIT License
+% Copyright (c) 2022 Pontus Ebelin, Gyorgy Denes, Tomas Akenine-Möller, Kalle Åström, 
+% Magnus Oskarsson, William H. McIlhagga
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
