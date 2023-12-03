@@ -2,9 +2,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Teaser](pipeline.svg)](pipeline.svg)
 
-Flicker predictor reference implementation accompanying the under-review paper _"Estimates of Temporal Edge Detection Filters in Human Vision"_. This is a simplified version of the multi-scale [flicker model by Denes and Mantiuk 2020](https://github.com/gdenes355/flicker_metric_hvei).
+Flicker predictor reference implementation accompanying the paper _Estimates of Temporal Edge Detection Filters in Human Vision_ (accepted to ACM Transactions on Applied Perception). 
 
-The video cube is sampled at double the display refresh rate, and is convolved with a sampled temporal edge detection filter alongside the time axis. Values in the output that would require values from outside the time domain range are omitted.
+In this example, the edge detection model is applied to a video of alternating frames with the aim to detect flicker across consecutive frames. The video cube is sampled at double the display refresh rate, and is convolved with a sampled temporal edge detection filter alongside the time axis. Values in the output that would require values from outside the time domain range are omitted.
 To avoid scaling issues introduced by the changing refresh rates and the discrete convolution, we first normalize the edge detection filter such that all positive samples sum to $1$, and all negative samples sum to $-1$. The filter response varies along the time dimension, and we take the maximum value for each pixel along the time axis to get the largest response perceived during the second. These values are blurred as per Denes and Mantiuk 2020 before feeding them through a psychometric function to yield a probability of detection map.
 
 ## Usage
@@ -14,11 +14,11 @@ The model is self-contained in this repository. The single entry point is `predi
 For example usage, please see the `demo` folder.
 
 ## Python implementation
-There is a Python reference implementation available in [reference_impl_py.ipynb](reference_impl_py.ipynb). This is a translation of the original Matlab code, and is expected to yield similar answers to the original Matlab implementation. Results in the paper are based on Matlab.
+There is a Python reference implementation available in [reference_impl_py.ipynb](reference_impl_py.ipynb). This is a translation of the original Matlab code, and is expected to yield similar answers to the original Matlab implementation. The results in the paper are based on Matlab.
 
 
 ## Dataset
-This flicker stimuli dataset is reproduced from https://github.com/gdenes355/flicker_metric_hvei. Details on its collection can be found in the original paper (pre-print: https://www.cl.cam.ac.uk/~gd355/publications/hvei20_paper_comp.pdf). For completeness, we reproduce the dataset desciption here as well.
+This flicker stimuli dataset is reproduced from https://github.com/gdenes355/flicker_metric_hvei. Details on its collection can be found in the original paper (pre-print: https://www.cl.cam.ac.uk/~gd355/publications/hvei20_paper_comp.pdf). For completeness, we reproduce the dataset description here as well.
 
 You can evaluate your own flicker model against our dataset if you would like to. The entire dataset is uploaded and can be found in `stimuli.mat`. Use Matlab (scipi.io.loadmat from Python) to open this.
 Fields:
@@ -46,8 +46,8 @@ GroundTruth = squeeze(stimuli.P(iS,:,:));
 ```
 
 ## References
-_Under review_
-[1] Pontus Andersson, Tomas Akenine-Möller, Gyorgy Denes, Kalle Åström, Magnus Oskarsson, William H. McIlhagga "Estimates of Temporal Edge Detection Filters in Human Vision" 
+_Accepted to ACM Transactions on Applied Perception_
+[1] Pontus Ebelin, Gyorgy Denes, Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga "Estimates of Temporal Edge Detection Filters in Human Vision" , ACM Transactions on Applied Perception, 2024
 
 If you found  the stimuli dataset useful, please also cite our previous work:
 
@@ -56,7 +56,7 @@ If you found  the stimuli dataset useful, please also cite our previous work:
 ## License
 MIT License
 
-Copyright (c) 2022 Gyorgy Denes, Pontus Andersson, Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga
+Copyright (c) 2022 Pontus Ebelin, Gyorgy Denes, Tomas Akenine-Möller, Kalle Åström, Magnus Oskarsson, William H. McIlhagga
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
