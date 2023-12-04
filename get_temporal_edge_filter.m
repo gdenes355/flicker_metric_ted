@@ -9,7 +9,7 @@ function [filt, t] = get_temporal_edge_filter(t, tfilter)
 %  - tcsf_all: filter based on temporal CSF (stelaCSF), sampled in time
 %
 % References
-% under review.
+% Accepted to ACM Transations on Applied Perception (TAP) 2024
 %
 % MIT License
 % Copyright (c) 2022 Pontus Ebelin, Gyorgy Denes, Tomas Akenine-Möller, Kalle Åström, 
